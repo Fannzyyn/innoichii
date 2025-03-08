@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pesan Untukmu</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: black;
+            font-family: Arial, sans-serif;
+            color: white;
+            text-align: center;
+            animation: blinkBackground 5s infinite alternate;
+        }
+        @keyframes blinkBackground {
+            from { background: #222; }
+            to { background: #444; }
+        }
+        .message {
+            font-size: 24px;
+            max-width: 80%;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 3px solid white;
+            animation: typing 5s steps(50, end), blink 0.8s infinite;
+        }
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        @keyframes blink {
+            50% { border-color: transparent; }
+        }
+        .fade-in {
+            opacity: 0;
+            animation: fadeIn 3s forwards;
+        }
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+        .emoji {
+            font-size: 40px;
+            margin-top: 15px;
+            animation: bounce 1.5s infinite;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .back {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 18px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            background: #007bff;
+            color: white;
+            transition: 0.3s;
+        }
+        .back:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="message">Halo Adik Kesayangan! 😊</h1>
+    <p class="fade-in" style="font-size: 18px; max-width: 80%; margin-top: 10px;">
+        Kakak cuma mau bilang kalau kamu itu luar biasa! 😍 Teruslah ceria, pintar, dan jangan lupa bahagia ya!  
+        Kakak selalu mendukungmu! 💖✨
+    </p>
+    <div class="emoji">🎉🎈🎊</div>
+    <button class="back" onclick="window.location.href='interaktif.html'">Kembali ke Beranda</button>
+</body>
+</html>

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kejutan Foto & Video</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            margin: 0;
+            padding: 0;
+            overflow: auto;
+        }
+
+        .video-frame {
+            width: 100%;
+            max-width: 500px;
+            margin: 20px auto;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .video-frame video {
+            width: 100%;
+            border-radius: 15px;
+        }
+
+        .slideshow-container {
+            width: 100%;
+            max-width: 320px;
+            margin: 20px auto;
+            overflow: hidden;
+            position: relative;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .slideshow {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .slideshow img {
+            width: 100%;
+            max-width: 320px;
+            border-radius: 10px;
+            flex-shrink: 0;
+        }
+
+        .button-container {
+            display: none; /* Awalnya disembunyikan */
+            margin-top: 10px;
+        }
+
+        .nav-button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 18px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 20px;
+            margin: 5px;
+            transition: 0.3s;
+        }
+
+        .nav-button:hover {
+            background: #0056b3;
+        }
+
+        /* Tombol halaman tambahan */
+        .page-buttons {
+            margin-top: 20px;
+        }
+
+        .page-buttons button {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 12px 18px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 20px;
+            margin: 5px;
+            transition: 0.3s;
+        }
+
+        .page-buttons button:hover {
+            background: #218838;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Kejutan Spesial untuk Anda 🎉</h2>
+
+    <!-- Video tetap di awal -->
+    <div class="video-frame">
+        <video id="surprise-video" controls>
+            <source src="9.mp4" type="video/mp4">
+            Browser Anda tidak mendukung tag video.
+        </video>
+    </div>
+
+    <!-- Slideshow Foto -->
+    <div class="slideshow-container">
+        <div class="slideshow" id="slideshow">
+            <img src="1.jpg" alt="Foto 1">
+            <img src="2.jpg" alt="Foto 2">
+            <img src="3.jpg" alt="Foto 3">
+            <img src="4.jpg" alt="Foto 4">
+            <img src="5.jpg" alt="Foto 5">
+            <img src="6.jpg" alt="Foto 6">
+            <img src="7.jpg" alt="Foto 7">
+            <img src="8.jpg" alt="Foto 8">
+        </div>
+    </div>
+
+    <!-- Tombol Next/Prev (Di bawah slideshow) -->
+    <div class="button-container" id="button-container">
+        <button class="nav-button" onclick="changeSlide(-1)">&#10094; Sebelumnya</button>
+        <button class="nav-button" onclick="changeSlide(1)">Selanjutnya &#10095;</button>
+    </div>
+
+    <!-- Tambahan Tombol Navigasi ke Halaman Lain -->
+    <div class="page-buttons">
+        <button onclick="window.location.href='pesan.html'">Lihat Pesan</button>
+        <button onclick="window.location.href='interaktif.html'">Halaman Interaktif</button>
+    </div>
+
+    <script>
+        let slideIndex = 0;
+        const slideshow = document.getElementById("slideshow");
+        const images = document.querySelectorAll(".slideshow img");
+        const totalSlides = images.length;
+        const slideWidth = images[0].clientWidth;
+        const buttonContainer = document.getElementById("button-container");
+
+        function changeSlide(direction) {
+            slideIndex += direction;
+            if (slideIndex < 0) slideIndex = totalSlides - 1;
+            if (slideIndex >= totalSlides) slideIndex = 0;
+            slideshow.style.transform = `translateX(${-slideIndex * slideWidth}px)`;
+        }
+
+        function startAutoSlide() {
+            let interval = setInterval(() => {
+                slideIndex++;
+                if (slideIndex >= totalSlides) {
+                    clearInterval(interval); // Hentikan auto-slide setelah selesai
+                    buttonContainer.style.display = "block"; // Tampilkan tombol navigasi
+                    return;
+                }
+                slideshow.style.transform = `translateX(${-slideIndex * slideWidth}px)`;
+            }, 2000);
+        }
+
+        startAutoSlide(); // Mulai geser otomatis
+
+        // Swipe Gesture untuk geser manual di HP setelah auto-slide selesai
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        slideshow.addEventListener("touchstart", (e) => {
+            touchStartX = e.touches[0].clientX;
+        });
+
+        slideshow.addEventListener("touchend", (e) => {
+            touchEndX = e.changedTouches[0].clientX;
+            if (touchStartX > touchEndX + 50) {
+                changeSlide(1); // Geser kanan
+            } else if (touchStartX < touchEndX - 50) {
+                changeSlide(-1); // Geser kiri
+            }
+        });
+    </script>
+
+</body>
+</html>
